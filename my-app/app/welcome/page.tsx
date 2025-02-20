@@ -2,17 +2,22 @@
 "use client";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Welcome() {
   const { isAuthenticated, logout } = useAuth();
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!isAuthenticated) {
-      router.push("/auth/login");
+      router.replace("/auth/login"); // replace evita que el usuario pueda regresar con "atrás"
+    } else {
+      setLoading(false);
     }
   }, [isAuthenticated, router]);
+
+  if (loading) return null; // No renderizar nada hasta verificar
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
