@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     // Obtener todos los Pokémon
-    const allPokemon = await api.listPokemons(0, 151); // Ajusta el límite según sea necesario
+    const allPokemon = await api.listPokemons(0, 1025); // Ajusta el límite según sea necesario
 
     // Obtener detalles de cada Pokémon
     const pokemonDetails = await Promise.all(
@@ -28,7 +28,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           weight: details.weight, // Peso
           abilities: details.abilities.map((ability)=>({
             name : ability.ability.name,
-            is_hidden: ability.is_hidden
+            is_hidden: ability.is_hidden,
+            slot: ability.slot
           })),
     
         };

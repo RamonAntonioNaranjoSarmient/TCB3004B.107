@@ -13,7 +13,7 @@ interface Pokemon {
   stats: { name: string; value: number }[];
   height: number;
   weight: number;
-  abilities: { name: string; is_hidden: boolean }[];
+  abilities: { name: string; is_hidden: boolean; slot: string}[];
 }
 
 export default function PokedexPage() {
@@ -83,6 +83,10 @@ export default function PokedexPage() {
               />
             </div>
 
+            <strong>Height:</strong>
+            <p>{pokemon.height}</p>
+            <strong>Weight:</strong>
+            <p>{pokemon.weight}</p>
             <strong>Estadísticas:</strong>
             <ul>
               {pokemon.stats.map((stat) => (
@@ -95,7 +99,7 @@ export default function PokedexPage() {
             <strong>Habilidades:</strong>
             <ul>
               {pokemon.abilities.map((ability) => (
-                <li key={ability.name}> {/* Agregar key aquí */}
+                <li key={ability.slot}> {/* Agregar key aquí */}
                   {ability.is_hidden ? "Hidden Ability: " : "Ability: "}
                   {ability.name}
                 </li>
