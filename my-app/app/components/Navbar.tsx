@@ -12,6 +12,7 @@ export default function Navbar() {
         <Link href="/" className="mr-4">Inicio</Link>
         {isAuthenticated && <Link href="/dashboard" className="mr-4">Dashboard</Link>}
         {isAuthenticated && <Link href="/profile" className="mr-4">Perfil</Link>}
+        {isAuthenticated && <Link href="/pokedex" className="mr-4">Pokedex</Link>}
       </div>
       <div>
         {isAuthenticated ? (

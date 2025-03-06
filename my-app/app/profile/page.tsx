@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 export default function Profile() {
   const { isAuthenticated } = useAuth();
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
+  const [loading  , setLoading] = useState(true);
   useEffect(() => {
     if (!isAuthenticated) {
       router.replace("/auth/login");
