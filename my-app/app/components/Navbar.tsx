@@ -18,8 +18,14 @@ export default function Navbar() {
         {isAuthenticated ? (
           <button onClick={logout} className="bg-red-500 px-4 py-2 rounded">Cerrar Sesión</button>
         ) : (
-          <Link href="/auth/login" className="bg-blue-500 px-4 py-2 rounded">Iniciar Sesión</Link>
-        )}
+          <>
+            <Link href="/auth/login" className="bg-blue-500 px-4 py-2 rounded mr-1">Iniciar Sesión</Link>
+            <Link href="/Sign-Up" className="bg-blue-500 px-4 py-2 rounded mr-1 ">Sign-Up</Link>
+          </>
+        )
+        
+        }
+           
       </div>
     </nav>
   );
