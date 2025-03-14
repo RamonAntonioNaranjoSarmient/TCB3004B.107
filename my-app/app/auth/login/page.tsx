@@ -2,7 +2,8 @@
 "use client";
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
-
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Login() {
   const { login } = useAuth();
@@ -41,7 +42,14 @@ export default function Login() {
         >
           Entrar
         </button>
+        
       </form>
+
+
+      <Link href="../RecuperarContra" className="px-4 py-2 text-gray-600" >
+        ¿olvidaste tu contraseña?
+      </Link>
+
     </div>
   );
 }
