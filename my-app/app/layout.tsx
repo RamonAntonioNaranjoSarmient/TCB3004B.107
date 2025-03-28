@@ -1,16 +1,20 @@
 // app/layout.tsx
-import { AuthProvider } from "@/context/AuthContext";
+import { getUserSession } from "@/actions/auth";
 import Navbar from "./components/Navbar";
 import "./globals.css";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const session = await getUserSession();
+  
   return (
     <html lang="es">
       <body>
-        <AuthProvider>
-          <Navbar />
-          <main className="p-4">{children}</main>
-        </AuthProvider>
+        <Navbar initialUser={session?.user} />
+        <main className="p-4">{children}</main>
       </body>
     </html>
   );

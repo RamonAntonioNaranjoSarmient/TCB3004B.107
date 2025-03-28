@@ -1,8 +1,9 @@
+//app/pokedex/page.tsx
 "use client";
 import { useEffect, useState } from 'react';
 import CardFun from '../components/Card';
-import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/utils/supabase/client";
 
 interface Pokemon {
   id: number;
@@ -23,19 +24,32 @@ export default function PokedexPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const [authChecked, setAuthChecked] = useState(false);
 
-  const { isAuthenticated } = useAuth();
   const router = useRouter();
+  const [user, setUser] = useState<any>(null);
+  const supabase = createClient();
 
   const limit = 10; // Número de Pokémon por página
 
+
+
   useEffect(() => {
-    if (!isAuthenticated) {
-      router.replace("/auth/login");
-    } else {
-      fetchPokemon();
-    }
-  }, [isAuthenticated, router, currentPage, searchQuery]);
+    const checkAuth = async () => {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      
+      if (error || !user) {
+        router.replace("/auth/login");
+      } else {
+        setUser(user);
+        setLoading(false);
+        fetchPokemon();
+      }
+    };
+
+    checkAuth();
+  }, [router, currentPage, searchQuery]);
+
 
   const fetchPokemon = async () => {
     try {
