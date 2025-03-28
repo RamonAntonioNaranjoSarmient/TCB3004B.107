@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.2",
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.49.3",
     "axios": "^1.8.1",
     "axios-cache-interceptor": "^1.6.2",
     "class-variance-authority": "^0.7.1",
